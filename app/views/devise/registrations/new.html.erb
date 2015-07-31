@@ -6,7 +6,8 @@
         <%= f.error_notification %>
 
         <%= f.input :email, required: true, autofocus: true %>
-        <%= f.input :password, required: true %>
+        <%= f.input :password, required: true, :label => "Mot de passe" %>
+        <%= f.input :name, required: true, :label => "Nom" %>
         <%= f.button :submit, t('.sign_up', default: "Sign up"), class: "btn btn-primary" %>
       <% end %>
 

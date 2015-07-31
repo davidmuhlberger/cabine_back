@@ -1,0 +1,39 @@
+<div class="text-center">
+  <h1><%= "Répertoire de marques" %></h1>
+</div>
+<div class="container">
+    <% @brands.each do |brand| %>
+      <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+
+          <div class="row white-card">
+            <div class="col-xs-12 col-sm-12 text-center">
+              <h2><%= brand.name %></h2>
+              <h3>Contact</h3>
+              <h4><%= brand.contact_name %></h4>
+              <h4><%= brand.contact_function %></h4>
+              <h4><%= brand.email %></h4>
+              <h4><%= brand.phone %></h4>
+              <h3>Adresse</h3>
+              <h4><%= brand.address_street%></h4>
+              <h4><%= brand.address_zip%> <%= brand.address_city%></h4>
+              <hr>
+              <div>
+              <%= link_to edit_brand_path(brand) do %>
+                <i class="fa fa-pencil"></i><p>éditer</p>
+              <% end %>
+            </div>
+              <hr>
+              <br>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-3"></div>
+      </div>
+    <% end %>
+    <div class="row text-center">
+      <%= link_to "Ajouter une marque", new_brand_path, class: "btn btn-primary"%>
+    </div>
+<br>
+</div>

@@ -1,0 +1,25 @@
+<%= content_for(:title) do %>
+  Editer
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <h1>Editer <%= @brand.name %></h1>
+      <br>
+      <%= simple_form_for(@brand, url: brand_path(@brand)) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :name, :label => "Nom de la marque" %>
+        <%= f.input :contact_name, :label => "Nom du contact" %>
+        <%= f.input :contact_function, :label => "Fonction du contact" %>
+        <%= f.input :address_street, :label => "Numéro et rue" %>
+        <%= f.input :address_city, :label => "Ville" %>
+        <%= f.input :address_zip, :label => "Code postal" %>
+        <%= f.input :email, :label => "Adresse email du contact" %>
+        <%= f.input :phone, :label => "Numéro de téléphone du contact" %>
+        <p><%= f.button :submit, :label => "Mettre à jour" %></p>
+      <% end %>
+    </div>
+    <div class="col-xs-2"></div>
+  </div>
+</div>

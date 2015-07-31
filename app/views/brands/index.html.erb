@@ -1,0 +1,27 @@
+<div class="text-center">
+  <h1><%= "Marques au catalogue" %></h1>
+</div>
+<div class="container">
+    <% @brands.each do |brand| %>
+      <div class="row">
+        <div class="col-xs-3"></div>
+        <%= link_to brand_path(brand) do %>
+        <div class="col-xs-6">
+
+          <div class="row white-card">
+            <div class="col-xs-12 col-sm-12 text-center">
+              <h2><%= brand.name %></h2>
+              <hr>
+        <% end %>
+              <br>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-3"></div>
+      </div>
+    <% end %>
+    <div class="row text-center">
+      <%= link_to "Ajouter une marque", new_brand_path, class: "btn btn-primary"%>
+    </div>
+<br>
+</div>
