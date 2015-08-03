@@ -1,8 +1,8 @@
 class ProductRefsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_product, only: [:new, :create, :index, :edit, :update, :destroy]
+  before_action :find_product, only: [:new, :create, :index, :edit, :update, :destroy, :auto_new, :auto_create]
   before_action :find_product_ref, only: [:edit, :update, :show, :destroy]
-  before_action :find_brand, only: [:index, :new, :create, :destroy, :edit, :update,]
+  before_action :find_brand, only: [:index, :new, :create, :destroy, :edit, :update, :auto_create, :auto_new]
 
   def index
     @product_refs = []
@@ -19,11 +19,53 @@ class ProductRefsController < ApplicationController
     @product_ref = @product.product_refs.build(product_ref_params)
     @product_ref.product = @product
     @product_ref.sku_name = "#{@product.brand.name}-#{@product.name}-#{@product_ref.size}"
-    if @product.save
+    @product.inventory_quantity_cabine = 0
+    if @product_ref.save
       redirect_to brand_product_product_refs_path(@brand, @product)
     else
       render :new
     end
+  end
+
+  def auto_new
+    @product_ref = ProductRef.new
+  end
+
+  def auto_create
+    @product_ref = ProductRef.new
+    @product_ref = @product.product_refs.build(product_ref_auto_params)
+    if @product.gender == "Homme"
+      @product_ref.size = 40
+    elsif @product.gender == "Femme"
+      @product_ref.size = 35
+    end
+    @product_ref.sku_name = "#{@product.brand.name}-#{@product.name}-#{@product_ref.size}"
+    @product_ref.inventory_quantity_cabine = 0
+    @product_ref.save
+    if @product.gender == "Homme"
+      (41..46).each do |number|
+        product_ref = ProductRef.new
+        product_ref.size = number
+        product_ref.product = @product
+        product_ref.sku_name = "#{@product.brand.name}-#{@product.name}-#{number}"
+        product_ref.inventory_quantity_cabine = 0
+        product_ref.inventory_type = @product_ref.inventory_type
+        product_ref.inventory_brand_availability = @product_ref.inventory_brand_availability
+        product_ref.save
+      end
+    elsif @product.gender == "Femme"
+      (36..41).each do |number|
+        product_ref = ProductRef.new
+        product_ref.size = number
+        product_ref.product = @product
+        product_ref.sku_name = "#{@product.brand.name}-#{@product.name}-#{number}"
+        product_ref.inventory_quantity_cabine = 0
+        product_ref.inventory_type = @product_ref.inventory_type
+        product_ref.inventory_brand_availability = @product_ref.inventory_brand_availability
+        product_ref.save
+      end
+    end
+    redirect_to brand_product_product_refs_path(@brand, @product)
   end
 
   def edit
@@ -43,7 +85,11 @@ class ProductRefsController < ApplicationController
   private
 
   def product_ref_params
-    params.require(:product_ref).permit(:size, :inventory_quantity_cabine, :inventory_type, :inventory_brand_availability)
+    params.require(:product_ref).permit(:size, :inventory_type, :inventory_brand_availability)
+  end
+
+  def product_ref_auto_params
+    params.require(:product_ref_auto).permit(:inventory_type, :inventory_brand_availability)
   end
 
   def find_product

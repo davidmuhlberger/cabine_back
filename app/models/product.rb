@@ -24,8 +24,8 @@ class Product < ActiveRecord::Base
   validates :gender, presence: true
   validates :name, presence: true
   validates :availability, presence: true
-  validates :purchase_price_ht, presence: true, numericality: true, :numericality => {:greater_than => 0}
-  validates :gross_sell_price_ht, presence: true, numericality: true, :numericality => {:greater_than => 0}
-  validates :vat_rate, presence: true, numericality: true, :numericality => {:greater_than => 0, :less_than => 1}
-  validates :promotion_percentage, presence: true, numericality: true, :numericality => {:greater_than => 0, :less_than => 1}
+  validates :purchase_price_ht, presence: true, numericality: true, :numericality => {:greater_than_or_equal_to => 0}
+  validates :gross_sell_price_ht, presence: true, numericality: true, :numericality => {:greater_than_or_equal_to => 0}
+  validates :vat_rate, presence: true, numericality: true, :numericality => {:greater_than_or_equal_to => 0, :less_than => 1}
+  validates :promotion_percentage, presence: true, numericality: true, :numericality => {:greater_than_or_equal_to => 0, :less_than => 1}
 end
