@@ -1,0 +1,26 @@
+<%= content_for(:title) do %>
+  Nouveau modèle
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <h1>Créer un nouveau modèle pour <%= @brand.name %></h1>
+      <br>
+
+      <%= simple_form_for(@product, url: brand_products_path(@brand)) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :name, :label => "Nom du modèle" %>
+        <%= f.input :category, :label => "Type de produit", :collection => ["Chaussures", "Chaussettes", "Jeans"] %>
+        <%= f.input :gender, :label => "Genre", :collection => ["Femme", "Homme", "Mixte"] %>
+        <%= f.input :availability, :label => "Disponibilité", :collection => ["En catalogue", "Hors catalogue"] %>
+        <%= f.input :purchase_price_ht, :label => "Prix d'achat HT (€)" %>
+        <%= f.input :gross_sell_price_ht, :label => "Prix de vente HT (€)" %>
+        <%= f.input :vat_rate, :label => "Taux de TVA (entre 0 et 1)" %>
+        <%= f.input :promotion_percentage, :label => "Promotion online (entre 0 et 1)" %>
+        <p><%= f.button :submit, :label => "Enregistrer le modèle" %></p>
+      <% end %>
+    </div>
+    <div class="col-xs-2"></div>
+  </div>
+</div>

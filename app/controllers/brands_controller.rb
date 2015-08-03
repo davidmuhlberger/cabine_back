@@ -32,8 +32,11 @@ class BrandsController < ApplicationController
 
     def update
       find_brand
-      @brand.update(brand_params)
-      redirect_to brand_path(@brand)
+      if @brand.update(brand_params)
+        redirect_to brand_path(@brand)
+      else
+        render :new
+      end
     end
 
     private
