@@ -1,0 +1,22 @@
+<%= content_for(:title) do %>
+  Modifier pointure
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <h1 class="text-center">Modifier pointure pour <%= @brand.name %> - <%= @product.name %></h1>
+      <br>
+
+      <%= simple_form_for(@product_ref, url: brand_product_product_ref_path(@brand, @product, @product_ref)) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :size, :label => "Pointure" %>
+        <%= f.input :inventory_quantity_cabine, :label => "Quantité en stock Cabin(e)" %>
+        <%= f.input :inventory_type, :label => "Type de stock Cabin(e)", :collection => ["En dépôt", "Acheté"] %>
+        <%= f.input :inventory_brand_availability, :label => "Disponibilité chez la marque", :collection => ["Oui", "Non"] %>
+        <p><%= f.button :submit, :label => "Enregistrer le modèle" %></p>
+      <% end %>
+    </div>
+    <div class="col-xs-2"></div>
+  </div>
+</div>

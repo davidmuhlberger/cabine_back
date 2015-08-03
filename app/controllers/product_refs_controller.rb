@@ -2,7 +2,7 @@ class ProductRefsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_product, only: [:new, :create, :index, :edit, :update, :destroy]
   before_action :find_product_ref, only: [:edit, :update, :show, :destroy]
-  before_action :find_brand, only: [:index, :new, :create, :destroy]
+  before_action :find_brand, only: [:index, :new, :create, :destroy, :edit, :update,]
 
   def index
     @product_refs = []
@@ -31,8 +31,8 @@ class ProductRefsController < ApplicationController
   end
 
   def update
-    @product.update(product_params)
-    redirect_to brand_products_path(@brand)
+    @product_ref.update(product_ref_params)
+    redirect_to brand_product_product_refs_path(@brand, @product)
   end
 
   def destroy
