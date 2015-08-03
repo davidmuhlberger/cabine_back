@@ -34,8 +34,12 @@
              <p>Taux de TVA : <%= product.vat_rate %></p>
              <p>Promotion online : <%= product.promotion_percentage %></p>
              <br>
+             <%= link_to brand_product_product_refs_path(@brand, product) do %>
+             <p>Pointures</p>
+             <% end %>
+             <br>
              <%= link_to edit_brand_product_path(@brand, product) do %>
-             <div class="text-center"><i class="fa fa-pencil"></i></div>
+             <div><i class="fa fa-pencil"></i></div>
              <% end %>
             </div>
           <hr>

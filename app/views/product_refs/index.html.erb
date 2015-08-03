@@ -1,0 +1,64 @@
+<%= content_for(:title) do %>
+  <%= @product.name %>
+<% end %>
+<% if @product_refs.empty? %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-1">
+    </div>
+    <div class="col-xs-10">
+      <h1><%= @product.name %> par <%= @brand.name %></h1>
+      <h3>Il n'y pas encore de pointures pour <%= @product.name %></h3>
+      <br>
+      <br>
+      <br>
+    </div>
+    <div class="row text-center">
+  <%= link_to "Ajouter une pointure", new_brand_product_product_ref_path(@brand, @product), class: "btn btn-primary" %>
+</div>
+  </div>
+</div>
+<% else %>
+<div class="container">
+ <div class="row">
+   <div class="col-xs-3">
+   </div>
+   <div class="col-xs-9">
+    <h1><%= @product.name %> par <%= @brand.name %></h1>
+    <br>
+    <br>
+     <div class="row">
+       <% @product_refs.each do |product_ref| %>
+         <div class="col-xs-12 col-sm-6 col-md-4">
+           <div class="row" id="white-card">
+             <br>
+             <p>Pointure : <%= product_ref.size %></p>
+             <p>Référence : <%= product_ref.sku_name %></p>
+             <p>Stock Cabin(e) : <%= product_ref.inventory_quantity_cabine %></p>
+             <p>Type de stock : <%= product_ref.inventory_type %></p>
+             <p>Disponibilité chez la marque : <%= product_ref.inventory_brand_availability %></p>
+             <br>
+             <%= link_to edit_brand_product_product_ref_path(@brand, @product, product_ref) do %>
+             <div class="text-center"><i class="fa fa-pencil"></i></div>
+             <% end %>
+             <%= link_to brand_product_product_ref_path(@brand, @product, product_ref), method: :delete,
+                      data: { confirm: "Etes-vous sûr?" } do %>
+              <div class="text-center"><i class="fa fa-trash-o"></i></div>
+            </div>
+          <hr>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-1">
+    </div>
+  </div>
+  <% end %>
+</div>
+<br>
+<div class="row text-center">
+  <%= link_to "Ajouter une pointure", new_brand_product_product_ref_path(@brand, @product), class: "btn btn-primary" %>
+
+</div>
+<br>
+<% end %>
