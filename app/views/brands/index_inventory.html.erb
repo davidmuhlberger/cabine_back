@@ -47,7 +47,8 @@
           </div>
           <% product.product_refs.each do |product_ref| %>
             <div class="row text-center">
-              <div class="col-xs-2"></div>
+              <div class="col-xs-1"></div>
+              <div class="col-xs-1"><p><%= product.gender %></p></div>
               <div class="col-xs-3">
                 <%= product_ref.sku_name %>
               </div>
@@ -120,7 +121,8 @@
           </div>
           <% product.product_refs.each do |product_ref| %>
             <div class="row text-center">
-              <div class="col-xs-2"></div>
+              <div class="col-xs-1"></div>
+              <div class="col-xs-1"><p><%= product.gender %></p></div>
               <div class="col-xs-3">
                 <%= product_ref.sku_name %>
               </div>
