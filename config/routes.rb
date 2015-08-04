@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'brands/directory', to: "brands#directory", as: :brands_directory
+  get 'brands/index_inventory', to: "brands#index_inventory", as: :brands_index_inventory
   resources :brands, only: [:show, :index, :new, :create, :update, :edit] do
     resources :products, only: [:new, :create, :show, :edit, :update, :index] do
       get 'product_refs/auto_new', to: "product_refs#auto_new", as: :auto_new_product_ref

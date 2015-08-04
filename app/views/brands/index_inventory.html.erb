@@ -1,0 +1,33 @@
+<div class="text-center">
+  <h1>Etat des stocks</h1>
+  <br>
+  <br>
+</div>
+  <h2>Modèles au catalogue</h2>
+<div class="container">
+  <% @brands.each do |brand| %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3><%= brand.name %></h3>
+      </div>
+      <% brand.products.each do |product| %>
+        <% if product.availability == "En catalogue" %>
+          <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-11">
+              <%= product.name %>
+            </div>
+          </div>
+          <% product.product_refs.each do |product_ref| %>
+            <div class="row">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-4">
+                <%= product_ref.sku_name %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

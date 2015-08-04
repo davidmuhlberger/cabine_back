@@ -13,6 +13,15 @@
     </div>
   </div>
 </div>
+<div class="row text-center">
+  <%= link_to "Ajouter un modèle", new_brand_product_path(@brand), class: "btn btn-primary"%>
+</div>
+<br>
+<div class="row text-center">
+  <%= link_to "Retour aux marques", brands_path, class: "btn btn-success" %>
+  <br>
+  <br>
+</div>
 <% else %>
 <div class="container">
  <div class="row">
