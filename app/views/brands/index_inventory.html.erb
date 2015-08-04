@@ -4,25 +4,143 @@
   <br>
 </div>
   <h2>Modèles au catalogue</h2>
+  <br>
+  <br>
 <div class="container">
+  <div class="row text-center strong">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-3">
+      <strong><p>SKU</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Pointure</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Volume stock</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Dispo marque</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Prix TTC</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Promotion</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Prix griffé</p></strong>
+    </div>
+  </div>
   <% @brands.each do |brand| %>
     <div class="row">
-      <div class="col-xs-12">
-        <h3><%= brand.name %></h3>
+      <div class="col-xs-12 bg-blue">
+        <h4><%= brand.name %></h4>
       </div>
+      <hr>
       <% brand.products.each do |product| %>
         <% if product.availability == "En catalogue" %>
           <div class="row">
             <div class="col-xs-1"></div>
             <div class="col-xs-11">
-              <%= product.name %>
+              <h5><%= product.name %></h5>
             </div>
           </div>
           <% product.product_refs.each do |product_ref| %>
-            <div class="row">
+            <div class="row text-center">
               <div class="col-xs-2"></div>
-              <div class="col-xs-4">
+              <div class="col-xs-3">
                 <%= product_ref.sku_name %>
+              </div>
+              <div class="col-xs-1">
+                <%= product_ref.size %>
+              </div>
+              <div class="col-xs-1">
+                <%= product_ref.inventory_quantity_cabine %>
+              </div>
+              <div class="col-xs-1">
+                <%= product_ref.inventory_brand_availability %>
+              </div>
+              <div class="col-xs-1">
+                <p><%= number_to_currency_fr(product.gross_sell_price_ht / (1 - product.vat_rate))%> &euro;</p>
+              </div>
+              <div class="col-xs-1">
+                <%= product.promotion_percentage %>
+              </div>
+              <div class="col-xs-1">
+                <p><%= number_to_currency_fr(product.gross_sell_price_ht / (1 - product.vat_rate) * (1 - product.promotion_percentage))%> &euro;</p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+  <h2>Modèles hors catalogue</h2>
+  <br>
+  <br>
+<div class="container">
+  <div class="row text-center strong">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-3">
+      <strong><p>SKU</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Pointure</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Volume stock</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Dispo marque</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Prix TTC</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Promotion</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Prix griffé</p></strong>
+    </div>
+  </div>
+  <% @brands.each do |brand| %>
+    <div class="row">
+      <div class="col-xs-12 bg-orange">
+        <h4><%= brand.name %></h4>
+      </div>
+      <hr>
+      <% brand.products.each do |product| %>
+        <% if product.availability == "Hors catalogue" %>
+          <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-11">
+              <h5><%= product.name %></h5>
+            </div>
+          </div>
+          <% product.product_refs.each do |product_ref| %>
+            <div class="row text-center">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-3">
+                <%= product_ref.sku_name %>
+              </div>
+              <div class="col-xs-1">
+                <%= product_ref.size %>
+              </div>
+              <div class="col-xs-1">
+                <%= product_ref.inventory_quantity_cabine %>
+              </div>
+              <div class="col-xs-1">
+                <%= product_ref.inventory_brand_availability %>
+              </div>
+              <div class="col-xs-1">
+                <p><%= number_to_currency_fr(product.gross_sell_price_ht / (1 - product.vat_rate))%> &euro;</p>
+              </div>
+              <div class="col-xs-1">
+                <%= product.promotion_percentage %>
+              </div>
+              <div class="col-xs-1">
+                <p><%= number_to_currency_fr(product.gross_sell_price_ht / (1 - product.vat_rate) * (1 - product.promotion_percentage))%> &euro;</p>
               </div>
             </div>
           <% end %>
