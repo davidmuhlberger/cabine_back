@@ -19,7 +19,7 @@ class ProductRefsController < ApplicationController
     @product_ref = @product.product_refs.build(product_ref_params)
     @product_ref.product = @product
     @product_ref.sku_name = "#{@product.brand.name}-#{@product.name}-#{@product_ref.size}"
-    @product.inventory_quantity_cabine = 0
+    @product_ref.inventory_quantity_cabine = 0
     if @product_ref.save
       redirect_to brand_product_product_refs_path(@brand, @product)
     else

@@ -22,7 +22,11 @@ class ProductsController < ApplicationController
     @product = @brand.products.build(product_params)
     @product.brand = @brand
     if @product.save
+      if @product.category == "Chaussures"
       redirect_to brand_product_auto_new_product_ref_path(@brand, @product)
+      else
+        redirect_to  brand_products_path(@brand)
+      end
     else
       render :new
     end

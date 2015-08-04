@@ -6,14 +6,14 @@
 #  gender               :string
 #  name                 :string
 #  availability         :string
-#  purchase_price_ht    :string
-#  gross_sell_price_ht  :string
-#  vat_rate             :string
-#  promotion_percentage :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  brand_id             :integer
 #  category             :string
+#  purchase_price_ht    :decimal(, )
+#  gross_sell_price_ht  :decimal(, )
+#  vat_rate             :decimal(, )
+#  promotion_percentage :decimal(, )
 #
 
 class Product < ActiveRecord::Base

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: product_refs
+#
+#  id                           :integer          not null, primary key
+#  product_id                   :integer
+#  size                         :string
+#  sku_name                     :string
+#  inventory_quantity_cabine    :integer
+#  inventory_type               :string
+#  inventory_brand_availability :string
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#
+
 class ProductRef < ActiveRecord::Base
   belongs_to :product
   validates :product_id, presence: true

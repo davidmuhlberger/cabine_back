@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <%= image_tag "logo.jpg" %>
+        <%= image_tag "logo.png" %>
       </a>
     </div>
 
@@ -34,7 +34,7 @@
                 <% end %>
               </li>
               <li>
-                <%= link_to "#" do %>
+                <%= link_to users_home_directory_path do %>
                   <i class="fa fa-cubes"></i>  <%= t ".stock", default: "Stock" %>
                 <% end %>
               </li>

@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
     end
   end
+
+  get 'users/home_inventory', to: "users#home_inventory", as: :users_home_directory
 end
