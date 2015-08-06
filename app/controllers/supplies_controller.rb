@@ -15,10 +15,20 @@ class SuppliesController < ApplicationController
 
   def reception
     find_supply
+    @supply.update(supply_reception_date_params)
     @supply.status = "Reçu"
     @supply.save
-    # to do
-    redirect_to supplies_path
+    @supply.supply_batches.each do |batch|
+      batch.supply_batch_items.each do |item|
+        item.received_quantity = item.expected_quantity
+        item.save
+      end
+    end
+    redirect_to supply_supply_batch_items_reception_path(@supply)
+  end
+
+  def reception_date
+    find_supply
   end
 
   def show
@@ -50,6 +60,10 @@ class SuppliesController < ApplicationController
   def supply_params
     params.require(:supply).permit(:order_date, :expected_reception_date,
       :comment)
+  end
+
+  def supply_reception_date_params
+    params.require(:supply).permit(:reception_date)
   end
 
   def find_brand

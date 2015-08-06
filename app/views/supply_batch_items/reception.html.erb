@@ -1,0 +1,47 @@
+<div class="text-center">
+  <h1>Détail réception de la commande </h1>
+  <h1><%= @supply.brand.name %> </h1>
+  <br>
+  <h3>Valider les quantités reçues</h3>
+  <br>
+</div>
+
+<% @supply.supply_batches.each do |batch| %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-1 text-center"></div>
+    <div class="col-xs-3 text-center">
+      <h5><%= batch.product.name %></h5>
+    </div>
+    <div class="col-xs-8 text-center"></div>
+  </div>
+  <% batch.supply_batch_items.each do |item| %>
+  <div class="row">
+    <div class="col-xs-4 text-center">
+    </div>
+    <div class="col-xs-8 text-center">
+      <%= simple_form_for(item, url: supply_supply_batch_items_update_received_quantity_path(@supply, item), :html => { :class => 'form-inline' }) do |f| %>
+        <%= f.input :received_quantity, as: :select,  collection: 0..100, input_html: { :value => item.received_quantity}, label: "#{batch.product.name} - #{item.size} - Quantité commandée : #{item.expected_quantity}" %>
+        <%= f.button :submit, :label => "Quantité reçue" %>
+      <% end %>
+    </div>
+    <div class="col-xs-1 text-center">
+    </div>
+  </div>
+  <% end %>
+</div>
+<% end %>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <div>
+        <%= link_to "Enregistrer réception", supply_supply_batch_items_finalization_received_quantity_path(@supply), class: "btn btn-success btn-order" %>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</div>

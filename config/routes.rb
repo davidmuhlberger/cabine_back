@@ -15,8 +15,12 @@ Rails.application.routes.draw do
   get 'users/home_inventory', to: "users#home_inventory", as: :users_home_directory
   get 'supplies/brand_choice', to: "supplies#brand_choice", as: :supplies_brand_choice
   get 'supplies/:id/cancel', to: "supplies#cancel", as: :supplies_cancel
-  get 'supplies/:id/reception', to: "supplies#reception", as: :supplies_reception
+  get 'supplies/:id/reception_date', to: "supplies#reception_date", as: :supplies_reception_date
+  patch 'supplies/:id/reception', to: "supplies#reception", as: :supplies_reception
   resources :supplies, only: [:show, :index, :new, :create, :update, :edit] do
+    get 'supply_batch_items/reception', to: "supply_batch_items#reception", as: :supply_batch_items_reception
+    get 'supply_batch_items/finalization_received_quantity', to: "supply_batch_items#finalization_received_quantity", as: :supply_batch_items_finalization_received_quantity
+    patch 'supply_batch_items/update_received_quantity/:id', to: "supply_batch_items#update_received_quantity", as: :supply_batch_items_update_received_quantity
     resources :supply_batches, only: [:show, :index, :new, :create, :update, :edit] do
       get 'supply_batch_items/selection', to: "supply_batch_items#selection", as: :supply_batch_items_selection
       get 'supply_batch_items/finalization', to: "supply_batch_items#finalization", as: :supply_batch_items_finalization

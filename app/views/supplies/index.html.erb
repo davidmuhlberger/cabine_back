@@ -28,7 +28,7 @@
           <h5>Attendue le <%= supply.expected_reception_date %></h5>
         </div>
         <div class="col-xs-2">
-          <%= link_to "Réception", supplies_reception_path(supply), class: "btn btn-success" %>
+          <%= link_to "Réception", supplies_reception_date_path(supply), class: "btn btn-success" %>
         </div>
         <div class="col-xs-2">
           <%= link_to "Annuler", supplies_cancel_path(supply), class: "btn btn-danger" %>
