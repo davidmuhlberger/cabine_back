@@ -19,6 +19,7 @@
 class Product < ActiveRecord::Base
   belongs_to :brand
   has_many :product_refs
+  has_many :supply_batches
   validates :brand_id, presence: true
   validates :category, presence: true
   validates :gender, presence: true

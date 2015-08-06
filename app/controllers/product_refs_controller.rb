@@ -78,6 +78,9 @@ class ProductRefsController < ApplicationController
   end
 
   def destroy
+    @product_ref.supply_batch_items.each do |item|
+      item.product_ref_id = nil
+    end
     @product_ref.destroy
     redirect_to brand_product_product_refs_path(@brand, @product)
   end

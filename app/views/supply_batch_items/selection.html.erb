@@ -1,0 +1,33 @@
+<div class="text-center">
+  <h1>Sélection des pointures pour la commande </h1>
+  <h1><%= @supply_batch.product.brand.name %> - <%= @supply_batch.product.name %></h1>
+  <br>
+</div>
+
+<% @supply_batch.supply_batch_items.each do |item| %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3 text-center">
+    </div>
+    <div class="col-xs-6 text-center">
+      <%= simple_form_for(item, url: supply_batch_supply_batch_item_path(@supply_batch, item)) do |f| %>
+        <%= f.input :expected_quantity, as: :select,  collection: 0..100, input_html: { :value => 0}, label: "#{@supply_batch.product.name} - #{item.size}" %>
+        <p><%= f.button :submit, :label => "OK" %></p>
+      <% end %>
+    </div>
+    <div class="col-xs-3 text-center">
+    </div>
+  </div>
+</div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <div>
+        <%= link_to "Terminer", supply_batch_supply_batch_items_finalization_path(@supply_batch), class: "btn btn-success btn-order" %>
+        <br><br>
+      </div>
+    </div>
+  </div>
+</div>

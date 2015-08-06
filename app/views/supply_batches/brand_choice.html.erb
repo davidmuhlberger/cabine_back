@@ -1,0 +1,15 @@
+<div class="text-center">
+  <h1>Choix de la marque</h1>
+  <br>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3">
+    </div>
+    <div class="col-xs-6">
+      <div class="row">
+        <% @brands.each do |brand| %>
+          <%= link_to new_supply_batch_path(:brand_id => brand.id) do %>
+            <p><%= brand.name %></p>
+          <% end %>
+  <% end %>

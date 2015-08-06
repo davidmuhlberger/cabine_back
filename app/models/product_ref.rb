@@ -15,6 +15,7 @@
 
 class ProductRef < ActiveRecord::Base
   belongs_to :product
+  has_many :supply_batch_items
   validates :product_id, presence: true
   validates :size, presence: true
   validates :sku_name, presence: true

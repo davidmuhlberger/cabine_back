@@ -1,0 +1,86 @@
+<div class="text-center">
+  <h1>Approvisionnements</h1>
+  <br>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <br>
+          <%= link_to "Créer un nouvel approvisionnement", supply_batches_brand_choice_path, class: "btn btn-success" %>
+        <br>
+        <br>
+        <br>
+      </div>
+    </div>
+</div>
+<div class="container">
+  <% @supply_batches.each do |batch| %>
+  <% if batch.status == "En cours" %>
+    <div class="row bg-blue">
+      <div class="col-xs-4">
+        <h4>Commande n° <%= batch.id %></h4>
+      </div>
+      <div class="col-xs-4">
+        <h4>Attendue le <%= batch.expected_reception_date %></h4>
+      </div>
+      <div class="col-xs-2">
+        <%= link_to "Réception", "#", class: "btn btn-success" %>
+      </div>
+      <div class="col-xs-2">
+        <%= link_to "Annuler", "#", class: "btn btn-danger" %>
+      </div>
+      <hr>
+    </div>
+    <div class="row text-center strong">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-2">
+        <strong><p>Marque</p></strong>
+      </div>
+      <div class="col-xs-2">
+        <strong><p>Modèle</p></strong>
+      </div>
+      <div class="col-xs-1">
+        <strong><p>Pointure</p></strong>
+      </div>
+      <div class="col-xs-3">
+        <strong><p>SKU</p></strong>
+      </div>
+      <div class="col-xs-1">
+        <strong><p>Type stock</p></strong>
+      </div>
+      <div class="col-xs-1">
+        <strong><p>Quantité stock</p></strong>
+      </div>
+      <div class="col-xs-1">
+        <strong><p>Quantité attendue</p></strong>
+      </div>
+    </div>
+    <% batch.supply_batch_items.each do |item| %>
+    <div class="row text-center">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-2">
+        <%= batch.product.brand.name%>
+      </div>
+      <div class="col-xs-2">
+        <%= batch.product.name%>
+      </div>
+      <div class="col-xs-1">
+        <%= item.size%>
+      </div>
+      <div class="col-xs-3">
+        <%= item.sku_name%>
+      </div>
+      <div class="col-xs-1">
+        <%= item.product_ref.inventory_type%>
+      </div>
+      <div class="col-xs-1">
+        <%= item.product_ref.inventory_quantity_cabine%>
+      </div>
+      <div class="col-xs-1">
+        <%= item.expected_quantity%>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+  <% end %>
+</div>
