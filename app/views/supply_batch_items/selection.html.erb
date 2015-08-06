@@ -7,27 +7,35 @@
 <% @supply_batch.supply_batch_items.each do |item| %>
 <div class="container">
   <div class="row">
-    <div class="col-xs-3 text-center">
+    <div class="col-xs-1 text-center">
     </div>
-    <div class="col-xs-6 text-center">
-      <%= simple_form_for(item, url: supply_batch_supply_batch_item_path(@supply_batch, item)) do |f| %>
+    <div class="col-xs-10 text-center">
+      <%= simple_form_for(item, url: supply_supply_batch_supply_batch_item_path(@supply, @supply_batch, item), :html => { :class => 'form-inline' }) do |f| %>
         <%= f.input :expected_quantity, as: :select,  collection: 0..100, input_html: { :value => 0}, label: "#{@supply_batch.product.name} - #{item.size}" %>
-        <p><%= f.button :submit, :label => "OK" %></p>
+        <%= f.button :submit, :label => "OK" %>
       <% end %>
     </div>
-    <div class="col-xs-3 text-center">
+    <div class="col-xs-1 text-center">
     </div>
   </div>
 </div>
 <% end %>
-
+<br>
+<br>
+<br>
+<br>
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 text-center">
+    <div class="col-xs-6 text-center">
       <div>
-        <%= link_to "Terminer", supply_batch_supply_batch_items_finalization_path(@supply_batch), class: "btn btn-success btn-order" %>
-        <br><br>
+        <%= link_to "Terminer", supply_supply_batch_supply_batch_items_finalization_path(@supply, @supply_batch), class: "btn btn-success btn-order" %>
+      </div>
+    </div>
+    <div class="col-xs-6 text-center">
+      <div>
+        <%= link_to "Ajouter un modèle", supply_supply_batch_supply_batch_items_finalization_new_path(@supply, @supply_batch), class: "btn btn-primary btn-order" %>
       </div>
     </div>
   </div>
+  <br><br>
 </div>

@@ -1,0 +1,21 @@
+<%= content_for(:title) do %>
+  Nouvel appro
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <h1>Créer un nouvel approvisionnement auprès de <%= @brand.name %></h1>
+      <br>
+
+      <%= simple_form_for(@supply, url: supplies_path(@supply, :brand_id => @brand.id)) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :order_date, as: :string, :input_html => { :data => {:provide => :datepicker, 'date-format': "dd/mm/yyyy", 'date-start-date': Date.today.strftime('%d-%m-%Y'), 'date-autoclose': true} } %>
+        <%= f.input :expected_reception_date, as: :string, :input_html => { :data => {:provide => :datepicker, 'date-format': "dd/mm/yyyy", 'date-start-date': Date.today.strftime('%d-%m-%Y'), 'date-autoclose': true} } %>
+        <%= f.input :comment, :label => "Observations" %>
+        <p><%= f.button :submit, :label => "Choisir les pointures" %></p>
+      <% end %>
+    </div>
+    <div class="col-xs-2"></div>
+  </div>
+</div>

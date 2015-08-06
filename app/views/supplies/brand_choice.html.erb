@@ -9,7 +9,7 @@
     <div class="col-xs-6">
       <div class="row">
         <% @brands.each do |brand| %>
-          <%= link_to new_supply_batch_path(:brand_id => brand.id) do %>
+          <%= link_to new_supply_path(:brand_id => brand.id) do %>
             <p><%= brand.name %></p>
           <% end %>
   <% end %>

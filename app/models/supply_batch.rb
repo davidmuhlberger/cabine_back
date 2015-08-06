@@ -11,7 +11,6 @@
 
 class SupplyBatch < ActiveRecord::Base
   belongs_to :product
+  belongs_to :supply
   has_many :supply_batch_items
-  validates :order_date, presence: true
-  validates :expected_reception_date, presence: true
 end

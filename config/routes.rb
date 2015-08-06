@@ -13,10 +13,15 @@ Rails.application.routes.draw do
     end
   end
   get 'users/home_inventory', to: "users#home_inventory", as: :users_home_directory
-  get 'supply_batches/brand_choice', to: "supply_batches#brand_choice", as: :supply_batches_brand_choice
-  resources :supply_batches, only: [:show, :index, :new, :create, :update, :edit] do
-    get 'supply_batch_items/selection', to: "supply_batch_items#selection", as: :supply_batch_items_selection
-    get 'supply_batch_items/finalization', to: "supply_batch_items#finalization", as: :supply_batch_items_finalization
-    resources :supply_batch_items, only: [:update]
+  get 'supplies/brand_choice', to: "supplies#brand_choice", as: :supplies_brand_choice
+  get 'supplies/:id/cancel', to: "supplies#cancel", as: :supplies_cancel
+  get 'supplies/:id/reception', to: "supplies#reception", as: :supplies_reception
+  resources :supplies, only: [:show, :index, :new, :create, :update, :edit] do
+    resources :supply_batches, only: [:show, :index, :new, :create, :update, :edit] do
+      get 'supply_batch_items/selection', to: "supply_batch_items#selection", as: :supply_batch_items_selection
+      get 'supply_batch_items/finalization', to: "supply_batch_items#finalization", as: :supply_batch_items_finalization
+      get 'supply_batch_items/finalization_new', to: "supply_batch_items#finalization_new", as: :supply_batch_items_finalization_new
+      resources :supply_batch_items, only: [:update]
+    end
   end
 end
