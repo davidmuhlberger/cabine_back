@@ -8,15 +8,18 @@
   <br>
 <div class="container">
   <div class="row text-center strong">
-    <div class="col-xs-2"></div>
-    <div class="col-xs-3">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-4">
       <strong><p>SKU</p></strong>
     </div>
     <div class="col-xs-1">
-      <strong><p>Pointure</p></strong>
+      <strong><p>Volume stock net</p></strong>
     </div>
     <div class="col-xs-1">
-      <strong><p>Volume stock</p></strong>
+      <strong><p>Volume commandé</p></strong>
+    </div>
+    <div class="col-xs-1">
+      <strong><p>Volume réservé</p></strong>
     </div>
     <div class="col-xs-1">
       <strong><p>Dispo marque</p></strong>
@@ -40,23 +43,30 @@
       <% brand.products.each do |product| %>
         <% if product.availability == "En catalogue" %>
           <div class="row">
-            <div class="col-xs-1"></div>
-            <div class="col-xs-11">
+            <div class="col-xs-12">
               <h5><%= product.name %></h5>
             </div>
           </div>
           <% product.product_refs.each do |product_ref| %>
             <div class="row text-center">
-              <div class="col-xs-1"></div>
               <div class="col-xs-1"><p><%= product.gender %></p></div>
-              <div class="col-xs-3">
+              <div class="col-xs-4">
                 <%= product_ref.sku_name %>
               </div>
               <div class="col-xs-1">
-                <%= product_ref.size %>
+                <%= product_ref.inventory_quantity_cabine %>
               </div>
               <div class="col-xs-1">
-                <%= product_ref.inventory_quantity_cabine %>
+                <% count = 0 %>
+                <% product_ref.supply_batch_items.each do |item| %>
+                  <% if item.supply_batch.supply.status = "En cours" %>
+                    <% count = count + item.expected_quantity %>
+                  <% end %>
+                <% end %>
+                <p class="text-primary"> <%= count %> </p>
+              </div>
+              <div class="col-xs-1">
+                <% # %>
               </div>
               <div class="col-xs-1">
                 <%= product_ref.inventory_brand_availability %>

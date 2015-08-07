@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806080915) do
+ActiveRecord::Schema.define(version: 20150807080004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,33 @@ ActiveRecord::Schema.define(version: 20150806080915) do
     t.decimal  "gross_sell_price_ht"
     t.decimal  "vat_rate"
     t.decimal  "promotion_percentage"
+  end
+
+  create_table "return_batch_items", force: :cascade do |t|
+    t.integer  "return_batch_id"
+    t.integer  "product_ref_id"
+    t.integer  "quantity"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "size"
+    t.string   "sku_name"
+  end
+
+  create_table "return_batches", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "return_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "returns", force: :cascade do |t|
+    t.integer  "brand_id"
+    t.date     "expected_date"
+    t.string   "status"
+    t.date     "send_date"
+    t.text     "comment"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "supplies", force: :cascade do |t|

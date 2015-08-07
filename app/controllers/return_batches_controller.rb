@@ -1,0 +1,2 @@
+class ReturnBatchesController < ApplicationController
+end

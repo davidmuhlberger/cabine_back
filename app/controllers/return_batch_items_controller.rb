@@ -1,0 +1,2 @@
+class ReturnBatchItemsController < ApplicationController
+end
