@@ -18,6 +18,7 @@
 class Brand < ActiveRecord::Base
   has_many :products
   has_many :supplies
+  has_many :returns
   validates :name, presence: true
   validates :contact_name, presence: true
   validates :email, presence: true

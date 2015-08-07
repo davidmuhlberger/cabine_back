@@ -1,0 +1,41 @@
+<div class="text-center">
+  <h1>Sélection des pointures pour le renvoi </h1>
+  <h1><%= @return_batch.product.brand.name %> - <%= @return_batch.product.name %></h1>
+  <br>
+</div>
+
+<% @return_batch.return_batch_items.each do |item| %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-1 text-center">
+    </div>
+    <div class="col-xs-10 text-center">
+      <%= simple_form_for(item, url: return_return_batch_return_batch_item_path(@return, @return_batch, item), :html => { :class => 'form-inline' }) do |f| %>
+        <%= f.input :quantity, as: :select,  collection: 0..100, input_html: { :value => 0}, label: "#{@return_batch.product.name} - #{item.size}" %>
+        <%= f.button :submit, :label => "OK" %>
+      <% end %>
+    </div>
+    <div class="col-xs-1 text-center">
+    </div>
+  </div>
+</div>
+<% end %>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 text-center">
+      <div>
+        <%= link_to "Terminer", return_return_batch_return_batch_items_finalization_path(@return, @return_batch), class: "btn btn-success btn-order" %>
+      </div>
+    </div>
+    <div class="col-xs-6 text-center">
+      <div>
+        <%= link_to "Ajouter un modèle", return_return_batch_return_batch_items_finalization_new_path(@return, @return_batch), class: "btn btn-primary btn-order" %>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</div>

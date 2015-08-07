@@ -55,8 +55,6 @@ class SupplyBatchesController < ApplicationController
 
   private
 
-#Attention : il va falloir différencier les params pour la création / édition classiques et une fonction d'enregistrement de la réception de la commande
-
   def supply_batch_params
     params.require(:supply_batch).permit(:product_id)
   end
